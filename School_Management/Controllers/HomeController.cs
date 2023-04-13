@@ -20,7 +20,14 @@ namespace School_Management.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            if (1 == 1)
+            {
+                return Redirect("/Login/Index");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public IActionResult Privacy()
