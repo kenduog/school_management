@@ -1,55 +1,100 @@
+# SB Admin Angular
 
+SB Admin Angular is a free and open-sourced Bootstrap themed Angular 9 starter project.
 
-<h1>Star Admin2 Free Bootstrap Admin Template</h1>
-Star Admin 2 Free is an open-source, admin dashboard template built with <a href="https://getbootstrap.com/" target="_blank">Bootstrap 5</a>  created by <a href="https://www.bootstrapdash.com/" target="_blank">BootstrapDash</a>.
+It shares the same project structure and subset of tooling from our professional offering,
+[SB Admin Pro Angular](https://themes.startbootstrap.com/sb-admin-pro-angular/),
+so much of the [SB Admin Pro Angular Documentation](https://docs.startbootstrap.com/sb-admin-pro-angular/quickstart) is applicable.
 
-<h2>Preview</h2>
-<a href="https://www.bootstrapdash.com/demo/star-admin2-free/template/" target="_blank"><img src="screenshot.jpg"></a>
+In particular the documentation for [Structure](https://docs.startbootstrap.com/sb-admin-pro-angular/structure-root-level),
+and the documentation for [SBPro Schematics](https://docs.startbootstrap.com/sb-admin-pro-angular/development-general#sb-pro-schematics)
 
-<h2>Download and installation</h2>
+SB Admin Angular comes with a base implementation of navigation and layouts.
 
+For professionally designed components (including an advanced SideNav), 100% code coverage,
+starter cypress tests and more, please consider our professional offering:
+[SB Admin Pro Angular](https://themes.startbootstrap.com/sb-admin-pro-angular/)
 
-1 - Install node package. If you don’t know the installation steps, please click <a href="https://nodejs.org/en/">here</a>.
+## Quick Start
 
-2 - Click the Clone or Download button in GitHub and download as a ZIP file or you can enter the command git clone https://github.com/BootstrapDash/star-admin2-free-admin-template.git in your terminal to get a copy of this template.
+```bash
+git clone git@github.com:startbootstrap/sb-admin-angular.git
+cd sb-admin-angular
+npm install
+npm start
+```
 
-3 - After the files have been downloaded you will get a folder with all the required files
+`npm start` should open a browser window to <http://localhost:4200>
 
-4 - Open your terminal (Run as Administrator). You can install all the dependencies in the template by running the command npm install. All the required files are in the node modules. If you didn't run with admin authorities, you can see errors.
+By default angular runs on port 4200. To change this port you can run:
 
-5 - Find the file named index.html, check what all components you need. Open the file in a text editor and you can start editing.
+```bash
+# This starts the development server on port 4205,
+# but you can use any port you'd like
+export PORT=4205 && npm start
+```
 
-6 - Now that your project has now kick-started, all you need to do now is to code, code, and code to your heart's content.
+## Tests
 
-Star Admin 2 Free is a free admin dashboard template built with Bootstrap 5. We took the original Star Admin Pro and gave it a design overhaul along with newly written code to create our best template yet. This is a modern-looking dashboard with a clean and elegant design. The template is well crafted, with all the components neatly and carefully designed and arranged within the template. Star Admin 2 Free comes with a clean and well-commented code that makes it easy to work with the template. Thus making it an ideal pick for jump-starting your project.
+### Unit Tests
 
-<h2>Browser Support:</h2>
+```bash
+npm run test
+```
 
-Star Admin 2 Free is designed to work flawlessly with all the latest and modern web browsers.
+### e2e
 
-<h2>License Information:</h2>
+```bash
+npm run e2e
+```
 
+## Production
 
-Star Admin 2 Free is released under MIT license. This is a free Bootstrap 5 admin template developed from BootstrapDash. Feel free to download, use, share, and get creative with it.
+SB Admin Angular come with a production ready Dockerfile and build scripts.
 
+You can get Docker [here](https://www.docker.com/get-started)
 
+```bash
+npm run docker:build
+npm run docker:run
+```
 
-<h2>How to Contribute?:</h2>
+## Generate Code
 
+```bash
+npm run generate:module -- --path src/modules --name Test
+npm run generate:component -- --path src/modules/test/containers --name Test
+npm run generate:component -- --path src/modules/test/components --name Test
+npm run generate:directive -- --path src/modules/test/directives --name Test
+npm run generate:service -- --path src/modules/test/services --name Test
+```
 
-We love your contributions and we welcome them wholeheartedly. We believe the more the merrier. To contribute make sure you have Node.js and npm installed. Now run the command gulp --version. If the command returns with the Gulp version number, it means you have Gulp installed. If not you need to run the command npm install --global gulp-cli to install Gulp.
+_Note: Creating a Component and a Container use the same command,
+the difference is just the paths and how they are used._
 
+### MVCC
 
-After Gulp has been installed, follow the steps below to contribute.
-  <br>
-	1 -  Fork and clone the repo of Star Admin 2 Free
-  <br>
-	2 - Run the command npm install to install all the dependencies.
-  <br>
-	3 - Enter the command gulp serve. This will open Star Admin 2 Free in your default browser.
-  <br>
-	4 - Make your valuable contribution
-  <br>
-	5 - Submit a pull request
-  <hr>
-Do you need a template with more features and functionalities? Check out the premium version of Star Admin 2! Visit <a href="https://www.bootstrapdash.com" target="_blank">https://www.bootstrapdash.com</a> for more admin templates.
+Containers and Components are both Angular Components, but used in different ways.
+
+Containers should arrange Components.
+
+Obviously this can become subjective, but MVCC is the paradigm that we subscribe to.
+
+## Troubleshooting
+
+### npm start
+
+If you receive memory issues adjust
+`max_old_space_size` in the `ng` command of the `package.json`:
+
+```json
+"ng": "cross-env NODE_OPTIONS=--max_old_space_size=2048 ./node_modules/.bin/ng",
+```
+
+You can adjust 2048 to any number you need.
+
+For more information about why you may need `--max_old_space_size`
+see [this article](https://medium.com/@ashleydavis75/node-js-memory-limitations-30d3fe2664c0).
+
+Keep in mind that this project only uses node to build the angular application.
+There is no production dependency on node.
